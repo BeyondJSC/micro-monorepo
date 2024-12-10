@@ -1,0 +1,32 @@
+{
+  // 保存时自动格式化代码
+  "editor.formatOnSave": true,
+
+  // 指定 Prettier 作为默认的格式化工具
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  // 仅当项目中有 Prettier 配置文件时启用 Prettier
+  "prettier.requireConfig": true,
+
+  // 启用 Prettier 插件
+  "prettier.enable": true,
+
+  // 禁用 VSCode 自带的格式化程序，因为我们使用 Prettier
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  "stylelint.enable": true,
+  "stylelint.validate": ["css", "postcss", "scss", "vue"],
+
+  "editor.codeActionsOnSave": {
+    "source.fixAll.stylelint": "always",
+    "source.fixAll.eslint": "always"
+  }
+}

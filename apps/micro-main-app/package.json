@@ -1,0 +1,15 @@
+{
+  "name": "@mmrepo/micro-main-app",
+  "version": "0.0.1",
+  "description": "micro app main app",
+  "main": "index.js",
+  "scripts": {
+    "preinstall": "npx only-allow pnpm"
+  },
+  "keywords": [],
+  "author": "dreamfish",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "catalog:"
+  }
+}

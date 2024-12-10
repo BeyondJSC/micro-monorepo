@@ -1,0 +1,19 @@
+{
+  "name": "@mmrepo/runtime",
+  "version": "0.0.1",
+  "description": "base runtime dep library",
+  "types": "./typing/index.d.ts",
+  "main": "index.js",
+  "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "build": "tsc",
+    "build:type": "tsc --emitDeclarationOnly",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "catalog:"
+  }
+}

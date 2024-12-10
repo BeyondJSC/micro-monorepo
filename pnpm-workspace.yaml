@@ -1,0 +1,8 @@
+packages:
+  - apps/*
+  - packages/*
+
+catalog:
+  typescript: ^5.7.2
+  sass: ^1.82.0
+  sass-loader: ^16.0.4

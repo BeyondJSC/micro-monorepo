@@ -1,0 +1,15 @@
+{
+  "name": "@mmrepo/request",
+  "version": "0.0.1",
+  "description": "base request library",
+  "main": "index.js",
+  "scripts": {
+    "preinstall": "npx only-allow pnpm"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "catalog:"
+  }
+}
