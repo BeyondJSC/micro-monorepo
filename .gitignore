@@ -4,3 +4,4 @@ lib
 .DS_Store
 .rollup.cache
 tsconfig.tsbuildinfo
+dist
