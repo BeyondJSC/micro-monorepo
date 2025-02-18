@@ -2,3 +2,5 @@ node_modules
 *.log
 lib
 .DS_Store
+.rollup.cache
+tsconfig.tsbuildinfo

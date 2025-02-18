@@ -5,12 +5,13 @@
 - [-] 包管理器 pnpm workspace 工程搭建
 - [-] Typescript 集成
 - [-] prettier + esLint 集成 vscode自定保存lint
-- [ ] husky + commitList
+- [-] husky + commitList
 - [ ] 应用库工程搭建 webpack/vite + 集成qiankun/wujie
 - [ ] 基础库工程搭建 webpack/rollup + 文档generator
 - [ ] 基础组件库搭建 component / hooks
 - [ ] 基础工具库搭建 utils/request
 - [ ] 基础icon库搭建 icon
+- [ ] vscode 插件 代码片段
 
 ## 目录搭建
 

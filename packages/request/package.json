@@ -2,14 +2,28 @@
   "name": "@mmrepo/request",
   "version": "0.0.1",
   "description": "base request library",
-  "main": "index.js",
+  "main": "./dist/request.cjs.js",
+  "module": "./dist/request.esm.js",
+  "types": "./dist/index.d.ts",
+  "type": "module",
   "scripts": {
-    "preinstall": "npx only-allow pnpm"
+    "preinstall": "npx only-allow pnpm",
+    "build": "rollup -c"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "dependencies": {
+    "axios": "^1.7.9",
+    "ant-design-vue": "^4.2.6"
+  },
   "devDependencies": {
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "rollup": "^4.34.8",
+    "@rollup/plugin-typescript": "^12.1.2",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@babel/core": "^7.26.9",
+    "@babel/preset-env": "^7.26.9",
+    "tslib": "^2.8.1"
   }
 }
