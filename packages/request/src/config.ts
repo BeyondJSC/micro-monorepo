@@ -1,5 +1,6 @@
 import { message } from 'ant-design-vue'
 import {
+  AxiosProgressEvent,
   AxiosRequestConfig,
   AxiosResponse,
   CreateAxiosDefaults,
@@ -19,6 +20,14 @@ export interface InternalRequestConfig<D = any>
 
 export interface RequestConfig<D = any> extends AxiosRequestConfig<D> {
   silent?: boolean
+}
+
+export interface UploadRequestConfig<D = any>
+  extends Omit<RequestConfig<D>, 'onUploadProgress'> {
+  onUploadProgress?: (
+    percentCompleted: number,
+    progressEvent: AxiosProgressEvent
+  ) => void
 }
 
 export interface InternalResponse<T = any, D = any>

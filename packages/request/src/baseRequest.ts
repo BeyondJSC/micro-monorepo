@@ -4,7 +4,8 @@ import {
   createRequestDefaults,
   InternalData,
   InternalResponse,
-  RequestConfig
+  RequestConfig,
+  UploadRequestConfig
 } from './config'
 import {
   InterceptorOnRequestFulfilled,
@@ -17,8 +18,8 @@ export class BaseRequest {
   private globalConfig: CreateInternalDefaults
   constructor(config?: CreateInternalDefaults) {
     this.globalConfig = {
-      ...config,
-      ...createRequestDefaults
+      ...createRequestDefaults,
+      ...config
     }
     this.requestInstance = axios.create(this.globalConfig)
   }
@@ -42,16 +43,16 @@ export class BaseRequest {
     this.requestInstance.interceptors.response.use(onFulfilled, onRejected)
   }
 
-  http<D = any>(config: RequestConfig<D>) {
-    return this.requestInstance<
-      InternalData,
-      InternalResponse<InternalData>,
-      D
+  http<D = any, P = any>(config: RequestConfig<P>) {
+    return this.requestInstance.request<
+      InternalData<D>,
+      InternalResponse<InternalData<D>>,
+      P
     >(config).then((response) => {
       const { data: resData } = response
-
       if (resData.code !== 200) {
-        if (!this.globalConfig.silent && !config.silent) {
+
+        if (!this.globalConfig.silent || !config.silent) {
           this.globalConfig.onErrorMessage &&
             this.globalConfig.onErrorMessage(resData.message)
         }
@@ -63,22 +64,32 @@ export class BaseRequest {
     })
   }
 
-  post<D = any>(config: Omit<RequestConfig<D>, 'method'>) {
-    return this.http({
+  post<D = any, P = any>(config: Omit<RequestConfig<P>, 'method'>) {
+    return this.http<D, P>({
       ...config,
       method: 'post'
     })
   }
 
-  get<D = any>(config: Omit<RequestConfig<D>, 'method'>) {
-    return this.http({
+  get<D = any, P = any>(config: Omit<RequestConfig<P>, 'method'>) {
+    return this.http<D>({
       ...config,
       method: 'get'
     })
   }
 
-  upload() {
-    // TODO
+  upload<D = any, P = any>(config: Omit<UploadRequestConfig<P>, 'method'>) {
+    return this.http<D, P>({
+      ...config,
+      method: 'post',
+      onUploadProgress: (event) => {
+        if (!event.total || !config.onUploadProgress) return
+        // 计算上传进度百分比
+        const percentCompleted = Math.round((event.loaded * 100) / event.total)
+
+        config.onUploadProgress(percentCompleted, event)
+      }
+    })
   }
 
   download() {

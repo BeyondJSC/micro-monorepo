@@ -7,7 +7,7 @@ import { InternalData, RequestConfig } from './config'
  * @param {AxiosRequestConfig} config - Axios 请求配置对象
  * @returns {string} - 唯一的缓存键
  */
-function generateCacheKey(config: RequestConfig): string {
+export function generateCacheKey(config: RequestConfig): string {
   let key = config.url || ''
   if (config.params) {
     const sortedParams = Object.entries(config.params).sort((a, b) =>
@@ -18,6 +18,7 @@ function generateCacheKey(config: RequestConfig): string {
   if (config.data) {
     key += JSON.stringify(config.data)
   }
+
   return key
 }
 
@@ -28,7 +29,7 @@ export function createCachedRequest(
   // 用于存储请求的缓存对象
   const requestCache: {
     [key: string]: {
-      promise: Promise<InternalData>
+      getPromise: () => Promise<InternalData>
       expiry: number
     }
   } = {}
@@ -57,24 +58,24 @@ export function createCachedRequest(
       const cached = requestCache[cacheKey]
 
       if (cached && cached.expiry > now) {
-        return cached.promise
+        return cached.getPromise()
       }
 
       // 创建一个占位的 Promise
       const newPromise = new Promise<InternalData>((resolve, reject) => {
         requestMethod(config)
           .then((response) => {
-            const updatedPromise = Promise.resolve(response)
+            const updatedPromise = () => Promise.resolve(response)
             requestCache[cacheKey] = {
-              promise: updatedPromise,
+              getPromise: updatedPromise,
               expiry: now + cacheDuration
             }
             resolve(response)
           })
           .catch((error: AxiosError) => {
-            const updatedPromise = Promise.reject(error)
+            const updatedPromise = () => Promise.reject(error)
             requestCache[cacheKey] = {
-              promise: updatedPromise,
+              getPromise: updatedPromise,
               expiry: now + cacheDuration
             }
             reject(error)
@@ -83,7 +84,7 @@ export function createCachedRequest(
 
       if (!cached || cached.expiry <= now) {
         requestCache[cacheKey] = {
-          promise: newPromise,
+          getPromise: () => newPromise,
           expiry: now + cacheDuration
         }
       }
@@ -93,8 +94,8 @@ export function createCachedRequest(
   }
 
   return {
-    http: createRequestProxy(baseRequestVm.http),
-    get: createRequestProxy(baseRequestVm.get),
-    post: createRequestProxy(baseRequestVm.post)
+    http: createRequestProxy(baseRequestVm.http.bind(baseRequestVm)),
+    get: createRequestProxy(baseRequestVm.get.bind(baseRequestVm)),
+    post: createRequestProxy(baseRequestVm.post.bind(baseRequestVm))
   }
 }

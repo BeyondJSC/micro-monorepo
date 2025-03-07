@@ -1,3 +1,9 @@
-console.log('test222')
+import { createRequest } from '@mmrepo/request'
 
-console.log(11212)
+const request = createRequest()
+
+request
+  .http<{ msg: string }>({
+    url: 'xxx'
+  })
+  .then((data) => {})

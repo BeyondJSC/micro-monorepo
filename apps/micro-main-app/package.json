@@ -9,6 +9,9 @@
   "keywords": [],
   "author": "dreamfish",
   "license": "ISC",
+  "dependencies": {
+    "@mmrepo/request": "workspace:*"
+  },
   "devDependencies": {
     "typescript": "catalog:"
   }

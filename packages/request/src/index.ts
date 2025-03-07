@@ -6,4 +6,4 @@ export function createRequest(createInternalDefaults?: CreateInternalDefaults) {
   return new BaseRequest(createInternalDefaults)
 }
 
-export { createCachedRequest }
+export { createCachedRequest, BaseRequest }
