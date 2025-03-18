@@ -1,9 +1,10 @@
-import { createRequest } from '@mmrepo/request'
+// import { createRequest } from '@mmrepo/request'
 
-const request = createRequest()
+// const request = createRequest()
 
-request
-  .http<{ msg: string }>({
-    url: 'xxx'
-  })
-  .then((data) => {})
+// request
+//   .http<{ msg: string }>({
+//     url: 'xxx'
+//   })
+//   .then((data) => {})
+import {} from '@mmrepo/components'

@@ -10,7 +10,8 @@
   "author": "dreamfish",
   "license": "ISC",
   "dependencies": {
-    "@mmrepo/request": "workspace:*"
+    "@mmrepo/request": "workspace:*",
+    "@mmrepo/components": "workspace:*"
   },
   "devDependencies": {
     "typescript": "catalog:"
