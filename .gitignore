@@ -1,8 +1,10 @@
 node_modules
 *.log
 lib
+es
 .DS_Store
 .rollup.cache
 tsconfig.tsbuildinfo
 dist
+types
 coverage

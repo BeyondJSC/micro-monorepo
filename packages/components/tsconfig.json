@@ -10,6 +10,8 @@
     "jsxFactory": "h",
     "jsxFragmentFactory": "Fragment",
     "jsxImportSource": "vue",
+    "declaration": true,
+    "declarationDir": "./dist",
     "outDir": "dist"
   },
   "include": ["src"]

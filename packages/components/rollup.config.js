@@ -15,15 +15,14 @@ const external = [
   '@babel/runtime'
 ]
 
-function genPlugins(type = 'main') {
+function genPlugins() {
   const plugins = [
     nodeResolve(),
     commonjs(),
     typescript({
       tsconfig: './tsconfig.json',
       check: false,
-      declaration: type === 'module',
-      declarationDir: type === 'module' ? 'types' : undefined,
+      useTsconfigDeclarationDir: true,
       exclude: ['**/*.test.ts']
     }),
     vue({
@@ -74,14 +73,14 @@ export default async function () {
     input: moduleEntryPaths,
     output: [
       {
-        dir: 'es',
+        dir: 'dist',
         format: 'es',
         preserveModules: true,
         preserveModulesRoot: 'src',
         entryFileNames: '[name].mjs'
       },
       {
-        dir: 'lib',
+        dir: 'dist',
         format: 'cjs',
         exports: 'named',
         preserveModules: true,
@@ -89,7 +88,7 @@ export default async function () {
         entryFileNames: '[name].cjs'
       }
     ],
-    plugins: genPlugins('module'),
+    plugins: genPlugins(),
     external
   }
 

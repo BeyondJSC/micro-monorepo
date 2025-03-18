@@ -7,4 +7,4 @@
 //     url: 'xxx'
 //   })
 //   .then((data) => {})
-import {} from '@mmrepo/components'
+import { DatePickerInputProps } from '@mmrepo/components/dist/datePickerInput'
