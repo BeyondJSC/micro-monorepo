@@ -93,6 +93,9 @@ importers:
 
   packages/components:
     dependencies:
+      '@ant-design/icons-vue':
+        specifier: ^7.0.1
+        version: 7.0.1(vue@3.5.13(typescript@5.7.2))
       '@styils/vue':
         specifier: ^1.1.7
         version: 1.1.7(vue@3.5.13(typescript@5.7.2))
