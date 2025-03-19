@@ -101,33 +101,31 @@ export default defineComponent({
               />
             </ColorPickerHeader>
           ),
-          content: () => (
-            <>
-              <ColorPickerBody class="color-picker__body">
-                {props.colorOptions.map((color) => (
-                  <div class="color-picker__item" key={color}>
-                    <div
-                      class="color-picker__option"
-                      style={{ backgroundColor: color }}
-                      onClick={() => handleSelect(color)}
-                    ></div>
-                  </div>
-                ))}
-              </ColorPickerBody>
-              <ColorPickerFooter class="color-picker__footer">
-                <Button class="color-picker__btn" onClick={handleBtnClick}>
-                  自定义颜色
-                </Button>
-                <input
-                  class="color-picker__input"
-                  type="color"
-                  ref={html5ColorRef}
-                  value={props.value}
-                  onChange={handleInputChange}
-                />
-              </ColorPickerFooter>
-            </>
-          )
+          content: () => [
+            <ColorPickerBody class="color-picker__body">
+              {props.colorOptions.map((color) => (
+                <div class="color-picker__item" key={color}>
+                  <div
+                    class="color-picker__option"
+                    style={{ backgroundColor: color }}
+                    onClick={() => handleSelect(color)}
+                  ></div>
+                </div>
+              ))}
+            </ColorPickerBody>,
+            <ColorPickerFooter class="color-picker__footer">
+              <Button class="color-picker__btn" onClick={handleBtnClick}>
+                自定义颜色
+              </Button>
+              <input
+                class="color-picker__input"
+                type="color"
+                ref={html5ColorRef}
+                value={props.value}
+                onChange={handleInputChange}
+              />
+            </ColorPickerFooter>
+          ]
         }}
       </Popover>
     )
