@@ -7,9 +7,9 @@ import {
   VNode,
   watch
 } from 'vue'
-import { isDef, isUndef } from '../utils/tools'
 import { Select } from 'ant-design-vue'
 import { styled } from '@styils/vue'
+import { isDef, isUndef } from '@mmrepo/runtime'
 
 export const selectPlusProps = () => ({
   current: Number,

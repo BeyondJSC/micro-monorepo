@@ -4,6 +4,7 @@ import babel from '@rollup/plugin-babel'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import { globby } from 'globby'
+import replace from '@rollup/plugin-replace'
 
 const extensions = ['.ts', '.tsx', '.vue']
 
@@ -12,13 +13,18 @@ const external = [
   /^ant-design-vue/,
   '@styils/vue',
   'dayjs',
-  '@babel/runtime'
+  '@babel/runtime',
+  /^@mmrepo/
 ]
 
 function genPlugins() {
   const plugins = [
     nodeResolve(),
     commonjs(),
+    replace({
+      'process.env.VITEST': false,
+      preventAssignment: true
+    }),
     typescript({
       tsconfig: './tsconfig.json',
       check: false,
